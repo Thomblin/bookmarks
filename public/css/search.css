@@ -1,0 +1,67 @@
+
+.search {
+    width: 50%;
+    margin-left: 25%;
+    margin-bottom: 10px;
+    position: relative;
+    float: left;
+}
+
+.search input {
+    padding: 6px 15px 6px 30px;
+    width: 100%;
+    margin: 3px;
+    background: url('/graphics/search.png') no-repeat 8px 6px;
+    border-radius: 15px;
+    -moz-border-radius: 15px;
+    -webkit-border-radius: 15px;
+}
+
+.search input[type=text] {
+    border: 1px solid #d0d0d0;
+    background-color: #fcfcfc;
+    color: #333;
+}
+
+.search input[type=button], input[type=button]:hover {
+    position: relative;
+    left: -6px;
+    border: 1px solid #333333;
+    background: #e4f1f9; /* Old browsers */
+    background: -moz-linear-gradient(top, #e4f1f9 0%, #d5e7f3 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #e4f1f9), color-stop(100%, #d5e7f3)); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top, #e4f1f9 0%, #d5e7f3 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top, #e4f1f9 0%, #d5e7f3 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(top, #e4f1f9 0%, #d5e7f3 100%); /* IE10+ */
+    background: linear-gradient(top, #e4f1f9 0%, #d5e7f3 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#e4f1f9', endColorstr='#d5e7f3', GradientType=0); /* IE6-9 */
+    cursor: pointer;
+}
+
+.search .suggest {
+    position: absolute;
+    margin: 0 30px;
+    padding: 0;
+    border: 0;
+    width: 250px;
+    background: #fcfcfc;
+    border: 1px solid #333333;;
+    z-index: 5;
+    display: none;
+}
+
+.search ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.search li {
+    padding: 2px;
+}
+
+.search li:hover {
+    background: #ccc;
+    color: #fff;
+    cursor: pointer;
+}

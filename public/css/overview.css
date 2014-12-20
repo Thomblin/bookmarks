@@ -1,0 +1,115 @@
+* {
+    color: #333333;
+}
+
+#main {
+    width: 60%;
+    margin-left: 20%;
+}
+
+fieldset {
+    border-radius: 10px 10px;
+    background-color: #fcfcfc;
+    border: 1px solid #d0d0d0;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+fieldset legend {
+    cursor: pointer;
+    background-color: #fcfcfc;
+    border-radius: 5px 5px;
+    border: 1px solid #d0d0d0;
+    padding: 3px 10px;
+    white-space: nowrap;
+}
+
+fieldset.hidden {
+    border: 1px dashed #d0d0d0;
+    width: 10px;
+    margin-left: 0;
+    float: left;
+}
+
+#groups.hideCollapsed fieldset.hidden {
+    display: none;
+}
+
+fieldset.hidden .content {
+    display: none;
+}
+
+fieldset span {
+    margin-left: 2px;
+    background-color: #ccc;
+    border-radius: 10px 10px;
+    padding: 5px;
+    border: #aaa solid 1px;
+    font-size: small;
+}
+
+fieldset a {
+    color: saddlebrown;
+}
+
+fieldset p.highlight a {
+    background-color: yellow;
+    padding: 5px 0;
+}
+
+.add {
+    cursor: pointer;
+    float: right;
+    margin-top: 5px;
+}
+
+.edit {
+    cursor: pointer;
+}
+
+.edit.link {
+    margin-left: 2px;
+}
+
+.modal {
+    border: 1px solid #333333;
+    box-shadow: #cccccc;
+    width: 200px;
+    position: fixed;
+    top: 30%;
+    left: 50%;
+    background: none repeat scroll 0 0 #fefefe;
+    padding: 25px;
+    border-radius: 5px;
+    -webkit-box-shadow: 2px 2px 1px 0px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: 2px 2px 1px 0px rgba(0, 0, 0, 0.75);
+    box-shadow: 2px 2px 1px 0px rgba(0, 0, 0, 0.75);
+    display: none;
+    z-index: 11;
+}
+
+.modal h2 {
+    font-size: 18px;
+}
+
+button {
+    background: none repeat scroll 0 0 #428bca;
+    border: 1px solid #357ebd;
+    border-radius: 3px;
+    color: #fff;
+    font-size: 14px;
+    padding: 6px 10px;
+    margin-top: 5px;
+    cursor: pointer;
+}
+
+#blackening {
+    z-index: 10;
+    position: fixed;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    display: none;
+}

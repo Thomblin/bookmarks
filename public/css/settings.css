@@ -1,0 +1,69 @@
+
+.menu {
+    float: left;
+    margin-top: 5px;
+}
+
+.settings {
+    width: 24px;
+    height: 24px;
+    background: url("/graphics/menu.png");
+}
+
+nav ul {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    position: relative;
+    display: block;
+    background-color: #fcfcfc;
+}
+
+nav ul li {
+    float: left;
+    display: list-item;
+    list-style: none;
+    color: #333;
+}
+
+nav ul li span {
+    display: block;
+    background-color: #fcfcfc;
+    color: #333;
+    text-decoration: none;
+    font-size: 0.8em;
+    cursor: pointer;
+}
+
+nav li span:hover {
+    background-color: #ccc;
+    color: #fff;
+}
+
+nav li > span:after {
+    content: '';
+}
+
+nav li > span:only-child:after {
+    content: '';
+}
+
+nav ul ul {
+    display: none;
+    position: absolute;
+    border: 1px solid #000;
+}
+
+nav ul li:hover > ul {
+    display: list-item;
+}
+
+nav ul ul li {
+    width: 200px;
+    float: none;
+    position: relative;
+}
+
+nav ul ul li span {
+    padding: 15px 10px;
+}
