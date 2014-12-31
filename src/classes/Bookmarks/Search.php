@@ -1,9 +1,6 @@
 <?php
 /**
- * Created by PhpStorm.
- * User: seeb
- * Date: 12/30/14
- * Time: 8:16 PM
+ * Search is used to return all words that are stored in given Config and matching a search string.
  */
 
 namespace Bookmarks;
@@ -16,11 +13,18 @@ class Search
      */
     private $config;
 
+    /**
+     * @param Config $config
+     */
     public function __construct(Config $config)
     {
         $this->config = $config;
     }
 
+    /**
+     * @param string $search
+     * @return array
+     */
     public function getAllWords($search = null)
     {
         $config = $this->config->toArray();

@@ -1,9 +1,6 @@
 <?php
 /**
- * Created by PhpStorm.
- * User: seeb
- * Date: 12/10/14
- * Time: 9:23 PM
+ * Group maintains a single Group with all Links contained
  */
 
 namespace Bookmarks;
@@ -39,6 +36,8 @@ class Group
     }
 
     /**
+     * @param string $id
+     *
      * @return bool
      */
     public function issetLink($id)
@@ -94,7 +93,7 @@ class Group
     }
 
     /**
-     * @param $data
+     * @param array $data
      */
     public function fromArray(array $data)
     {

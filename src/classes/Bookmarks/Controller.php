@@ -1,21 +1,28 @@
 <?php
 /**
- * Created by PhpStorm.
- * User: seeb
- * Date: 12/15/14
- * Time: 10:43 PM
+ * Controller is used to handle all GET and POST requests
  */
 
 namespace Bookmarks;
 
 class Controller
 {
+    /**
+     * @param Storage $storage
+     * @param View $view
+     */
     public function __construct(Storage $storage, View $view)
     {
         $this->storage = $storage;
         $this->view    = $view;
     }
 
+    /**
+     * @param string $requestMethod
+     * @param array $values
+     *
+     * @return string
+     */
     public function parseRequest($requestMethod, $values)
     {
         try {

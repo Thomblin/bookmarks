@@ -1,4 +1,7 @@
 <?php
+/**
+ * Link maintains a single Link with its title, url and tags
+ */
 
 namespace Bookmarks;
 

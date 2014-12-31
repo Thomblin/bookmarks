@@ -1,4 +1,7 @@
 <?php
+/**
+ * Config is used to load and maintain Groups and Links
+ */
 
 namespace Bookmarks;
 

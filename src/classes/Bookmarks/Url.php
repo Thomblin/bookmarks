@@ -1,9 +1,6 @@
 <?php
 /**
- * Created by PhpStorm.
- * User: seeb
- * Date: 12/18/14
- * Time: 8:53 PM
+ * Url is used to decide whether a string is a valid url
  */
 
 namespace Bookmarks;

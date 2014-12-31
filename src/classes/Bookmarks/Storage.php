@@ -1,4 +1,7 @@
 <?php
+/**
+ * Storage is used to load and save our Config to a json File
+ */
 
 namespace Bookmarks;
 
@@ -13,6 +16,9 @@ class Storage
      */
     private $config;
 
+    /**
+     * @param string $filename
+     */
     public function __construct($filename)
     {
         $this->filename = $filename;

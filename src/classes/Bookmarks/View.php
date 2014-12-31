@@ -1,9 +1,6 @@
 <?php
 /**
- * Created by PhpStorm.
- * User: seeb
- * Date: 12/12/14
- * Time: 8:34 PM
+ * View is used to render templates with the Laravel Blade engine
  */
 
 namespace Bookmarks;
