@@ -49,7 +49,7 @@ BookmarkController = function (document, jQuery) {
         createGroup: function () {
             var data = {
                 title: jQuery('#group_name').val(),
-                action: "create group"
+                action: "createGroup"
             };
             var jqxhr = jQuery.post(document.URL, data, function () {
             })
@@ -74,7 +74,7 @@ BookmarkController = function (document, jQuery) {
                 title: jQuery('#link_title').val(),
                 url: jQuery('#link_url').val(),
                 group: jQuery("#link_group").val(),
-                action: "create link"
+                action: "createLink"
             };
             var jqxhr = jQuery.post(document.URL, data, function () {
             })
@@ -111,7 +111,7 @@ BookmarkController = function (document, jQuery) {
                     text: jQuery(this).val(),
                     group: jQuery(this).parents('fieldset.bookmarkgroup').attr('id'),
                     link: jQuery(this).parents('p.bookmark').attr('id'),
-                    action: "create tag"
+                    action: "createTag"
                 };
 
                 jQuery(this).prop('disabled', true);

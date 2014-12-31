@@ -92,6 +92,7 @@ class Link
             foreach ( $this->tags as $tag ) {
                 if ( false !== strpos($tag, $word) ) {
                     $ids[] = $this->getId();
+                    break;
                 }
             }
         }

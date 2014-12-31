@@ -20,7 +20,7 @@ class View
     public function __construct()
     {
         $views = realpath(__DIR__ . '/../../views');
-        $cache = realpath(__DIR__ . '/../../cache');
+        $cache = realpath(__DIR__ . '/../../../cache');
 
         $this->blade = new Blade($views, $cache);
     }
@@ -47,5 +47,17 @@ class View
     public function showLink(Link $link)
     {
         return $this->blade->view()->make('elements.link', array('link' => $link));
+    }
+
+    /**
+     * send header
+     *
+     * @param string $string
+     * @param bool $replace
+     * @param int $http_response_code
+     */
+    public function header($string, $replace = null, $http_response_code = null)
+    {
+        header($string, $replace, $http_response_code);
     }
 } 

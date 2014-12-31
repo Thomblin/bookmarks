@@ -27,7 +27,7 @@ class Storage
         return $this->config;
     }
 
-    private function parseConfig($filename)
+    private function parseConfig()
     {
         $config = new Config();
 
@@ -61,37 +61,5 @@ class Storage
             $this->filename,
             json_encode($this->config->toArray(), JSON_PRETTY_PRINT|JSON_UNESCAPED_SLASHES)
         );
-    }
-
-    public function getAllWords($search = null)
-    {
-        $config = $this->readConfig();
-
-        $words = array();
-
-        array_walk_recursive($config, function($text) use(&$words, $search) {
-
-            $isUrl = Url::isUrl($text);
-
-            if ( !$isUrl && null !== $search && 0 === strpos($text, $search) ) {
-                $words[] = $text;
-            } else {
-                foreach (preg_split('/[\W]/', $text, -1, PREG_SPLIT_NO_EMPTY) as $word) {
-                    if (null === $search || 0 === strpos($word, $search)) {
-                        if ($isUrl) {
-                            $words[] = $word;
-                        } else {
-                            $words[] = $text;
-                            break;
-                        }
-                    }
-                }
-            }
-        });
-
-        $words = array_unique($words);
-        sort($words);
-
-        return $words;
     }
 } 

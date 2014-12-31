@@ -14,7 +14,22 @@
         "philo/laravel-blade": "2.*",
         "kriswallsmith/assetic": "*"
     },
+    "require-dev": {
+        "behat/behat": "2.5.*@stable",
+        "behat/mink": "1.4.*@stable",
+        "behat/mink-extension": "*",
+        "behat/mink-goutte-driver": "*",
+        "behat/mink-selenium2-driver": "*",
+        "guzzlehttp/guzzle": "4.*",
+        "illuminate/filesystem": "4.2.12 as 2.6.1",
+        "symfony/finder" : "2.5.8 as 2.3.23",
+        "phpunit/dbunit": "*",
+        "phpunit/phpunit": "3.7.28"
+    },
     "autoload": {
-        "psr-0": { "Bookmarks": "src/" }
+        "psr-0": {
+            "Bookmarks": "src/classes/",
+            "TestHelper": "tests"
+        }
     }
 }

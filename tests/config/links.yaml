@@ -1,0 +1,16 @@
+{
+    "groups": [
+        {
+            "title": "my new group",
+            "links": [
+                {
+                    "url": "https://search.de",
+                    "title": "to search",
+                    "tags": [
+                        "search engine"
+                    ]
+                }
+            ]
+        }
+    ]
+}

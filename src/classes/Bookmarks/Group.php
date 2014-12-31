@@ -82,9 +82,14 @@ class Group
      */
     public function toArray()
     {
+        $links = array();
+        foreach ( $this->links as $link ) {
+            $links[] = $link->toArray();
+        }
+
         return array(
             'title' => $this->title,
-            'links' => array_values($this->links),
+            'links' => $links,
         );
     }
 
