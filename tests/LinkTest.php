@@ -139,18 +139,6 @@ class LinkTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @test
-     * @dataProvider provideSuccessfulSearchValues
-     */
-    public function searchReturnsLinkId($values, $word)
-    {
-        $link = new \Bookmarks\Link();
-        $link->fromArray($values);
-
-        $this->assertEquals(array($link->getId()), $link->search($word));
-    }
-
-    /**
      * @return array
      */
     public function provideSuccessfulSearchValues()
@@ -185,18 +173,6 @@ class LinkTest extends PHPUnit_Framework_TestCase
                 'word' => 'search engine'
             ),
         );
-    }
-
-    /**
-     * @test
-     * @dataProvider provideSearchValuesWithoutResult
-     */
-    public function searchReturnsEmptyArray($values, $word)
-    {
-        $link = new \Bookmarks\Link();
-        $link->fromArray($values);
-
-        $this->assertEquals(array(), $link->search($word));
     }
 
     /**

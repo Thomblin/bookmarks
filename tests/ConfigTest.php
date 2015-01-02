@@ -126,29 +126,4 @@ class ConfigTest extends PHPUnit_Framework_TestCase
         $this->config->fromArray($data);
         $this->assertTrue($this->config->issetGroup(sha1('foo')));
     }
-
-    /**
-     * @test
-     */
-    public function searchReturnsIdOfAddedGroups()
-    {
-        $expected = array();
-        $this->assertEquals($expected, $this->config->search('test'));
-
-        $g1 = new Group();
-        $g1->id = '1st';
-        $g1->searchResult['test'] = array('1');
-        $this->config->addGroup($g1);
-
-        $expected = array('1');
-        $this->assertEquals($expected, $this->config->search('test'));
-
-        $g2 = new Group();
-        $g2->id = '2nd';
-        $g2->searchResult['test'] = array('2', '3');
-        $this->config->addGroup($g2);
-
-        $expected = array('1', '2', '3');
-        $this->assertEquals($expected, $this->config->search('test'));
-    }
 }

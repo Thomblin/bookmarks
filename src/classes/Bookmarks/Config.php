@@ -81,20 +81,4 @@ class Config
             }
         }
     }
-
-    /**
-     * @param string $word
-     *
-     * @return array
-     */
-    public function search($word)
-    {
-        $ids = array();
-
-        foreach ( $this->getGroups() as $group ) {
-            $ids = array_merge($ids, $group->search($word));
-        }
-
-        return $ids;
-    }
 } 

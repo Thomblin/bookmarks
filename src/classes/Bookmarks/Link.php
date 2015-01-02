@@ -77,29 +77,4 @@ class Link
         $this->title = isset($data['title']) ? $data['title'] : '';
         $this->tags = isset($data['tags']) && is_array($data['tags']) ? $data['tags'] : array();
     }
-
-    /**
-     * @param string $word
-     *
-     * @return array
-     */
-    public function search($word)
-    {
-        $ids = array();
-
-        if ( false !== strpos($this->title, $word) ) {
-            $ids[] = $this->getId();
-        } else if ( false !== strpos($this->url, $word) ) {
-            $ids[] = $this->getId();
-        } else {
-            foreach ( $this->tags as $tag ) {
-                if ( false !== strpos($tag, $word) ) {
-                    $ids[] = $this->getId();
-                    break;
-                }
-            }
-        }
-
-        return $ids;
-    }
 } 

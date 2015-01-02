@@ -108,24 +108,4 @@ class Group
             }
         }
     }
-
-    /**
-     * @param string $word
-     *
-     * @return array
-     */
-    public function search($word)
-    {
-        $ids = array();
-
-        foreach ( $this->getLinks() as $link ) {
-            $ids = array_merge($ids, $link->search($word));
-        }
-
-        if ( !empty($ids) || false !== strpos($this->title, $word) ) {
-            $ids[] = $this->getId();
-        }
-
-        return $ids;
-    }
 } 
