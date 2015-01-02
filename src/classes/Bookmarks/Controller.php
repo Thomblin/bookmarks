@@ -8,6 +8,19 @@ namespace Bookmarks;
 class Controller
 {
     /**
+     * @var Storage
+     */
+    private $storage;
+    /**
+     * @var View
+     */
+    private $view;
+    /**
+     * @var Search
+     */
+    private $search;
+
+    /**
      * @param Storage $storage
      * @param View $view
      */
@@ -110,7 +123,7 @@ class Controller
         $link = $group->getLink($values['link']);
         $link->addTag($values['text']);
 
-        return $values['text'];
+        return $this->view->showTag($values['text']);
     }
 
     /**
@@ -119,10 +132,8 @@ class Controller
      */
     private function postRequestSearch(array $values)
     {
-        $search = new Search($this->storage->getConfig());
-
         $words = 0 < strlen($values['search'])
-            ? $search->getAllWords($values['search'])
+            ? $this->getSearch()->findWords($values['search'])
             : array();
 
         $this->view->header('Cache-Control: no-cache, must-revalidate');
@@ -132,6 +143,15 @@ class Controller
         return json_encode($words);
     }
 
+    private function getSearch()
+    {
+        if ( null === $this->search ) {
+            $this->search = new Search($this->storage->getConfig());
+        }
+
+        return $this->search;
+    }
+
     /**
      * @param array $values
      * @return string
@@ -139,7 +159,7 @@ class Controller
     private function postRequestShow(array $values)
     {
         $ids = 0 < strlen($values['search'])
-            ? $this->storage->getConfig()->search($values['search'])
+            ? $this->getSearch()->findIds($values['search'])
             : array();
 
         $this->view->header('Cache-Control: no-cache, must-revalidate');
@@ -147,5 +167,14 @@ class Controller
         $this->view->header('Content-type: application/json');
 
         return json_encode($ids);
+    }
+
+    /**
+     * @param Environment $env
+     */
+    public function injectEnvironment(Environment $env)
+    {
+        $this->getSearch()->injectEnvironment($env);
+        $this->view->injectEnvironment($env);
     }
 }

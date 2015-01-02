@@ -8,9 +8,7 @@
     </div>
 
     <div id="groups" class="hideCollapsed">
-        @foreach($storage->getConfig()->getGroups() as $group)
-            @include('elements.group')
-        @endforeach
+        {{$groupHtml}}
     </div>
 
     @include('elements.modals')

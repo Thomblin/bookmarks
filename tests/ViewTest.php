@@ -134,4 +134,107 @@ class ViewTest extends PHPUnit_Framework_TestCase
             'html should contain "add tag" element'
         );
     }
+
+    /**
+     * @test
+     */
+    public function showAllReplacesUserVariables()
+    {
+        $storage = new \Bookmarks\Storage(
+            __DIR__ . DIRECTORY_SEPARATOR . 'config' . DIRECTORY_SEPARATOR . 'links.yaml'
+        );
+
+        $group = new \Bookmarks\Group();
+        $group->title = "my new {domain}";
+
+        $storage->getConfig()->addGroup($group);
+
+        $env = new \Bookmarks\Environment();
+        $env->inject('domain', 'abc');
+
+        $view = new \Bookmarks\View();
+        $view->injectEnvironment($env);
+
+        $actual = (string) $view->showAll($storage);
+
+        $this->assertStringContains(
+            'my new abc',
+            $actual,
+            'html should replace {domain} and contain "my new abc"'
+        );
+    }
+
+    /**
+     * @test
+     */
+    public function showGroupReplacesUserVariables()
+    {
+        $group = new \Bookmarks\Group();
+        $group->title = 'any {domain}';
+
+        $link = new \Bookmarks\Link();
+        $link->title = 'this is {title}';
+        $link->url = 'http://{domain}.de';
+        $group->addLink($link);
+
+        $env = new \Bookmarks\Environment();
+        $env->inject('domain', 'abc');
+        $env->inject('title', 'my group');
+
+        $view = new \Bookmarks\View();
+        $view->injectEnvironment($env);
+
+        $actual = (string) $view->showGroup($group);
+
+        $this->assertStringContains(
+            'any abc',
+            $actual,
+            'html should replace {domain} and contain "any abc" title'
+        );
+        $this->assertStringContains(
+            'this is my group',
+            $actual,
+            'html should replace {title} and contain tag "this is my group"'
+        );
+        $this->assertStringContains(
+            'http://abc.de',
+            $actual,
+            'html should replace {domain} and contain url "http://abc.de"'
+        );
+    }
+
+    /**
+     * @test
+     */
+    public function showLinkReplacesUserVariables()
+    {
+        $link = new \Bookmarks\Link();
+        $link->title = 'my {domain}';
+        $link->url = 'http://{domain}.de';
+        $link->tags = array('tag {domain}', 'tag2');
+
+        $env = new \Bookmarks\Environment();
+        $env->inject('domain', 'abc');
+
+        $view = new \Bookmarks\View();
+        $view->injectEnvironment($env);
+
+        $actual = (string) $view->showLink($link);
+
+        $this->assertStringContains(
+            'my abc',
+            $actual,
+            'html should replace {domain} and contain "my abc" title'
+        );
+        $this->assertStringContains(
+            'my abc',
+            $actual,
+            'html should replace {domain} and contain url "http://abc.de"'
+        );
+        $this->assertStringContains(
+            'my abc',
+            $actual,
+            'html should replace {domain} and contain tag "tag abc"'
+        );
+    }
 }

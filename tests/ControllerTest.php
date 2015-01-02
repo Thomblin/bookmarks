@@ -32,7 +32,7 @@ class ControllerTest extends PHPUnit_Framework_TestCase
         );
 
         $this->config = $this->getMock(
-            '\Bookmarks\Config', array('addGroup', 'getGroup', 'toArray', 'search'), array(),  '', false
+            '\Bookmarks\Config', array('addGroup', 'getGroup', 'getGroups', 'search'), array(),  '', false
         );
 
         $this->storage = $this->getMock(
@@ -204,9 +204,12 @@ class ControllerTest extends PHPUnit_Framework_TestCase
      */
     public function postRequestSearch()
     {
+        $group = new \Bookmarks\Group();
+        $group->title = 'search engine';
+
         $this->config->expects($this->once())
-            ->method('toArray')
-            ->will($this->returnValue(array('search engine')));
+            ->method('getGroups')
+            ->will($this->returnValue(array($group)));
 
         $this->view->expects($this->at(0))
             ->method('header')
@@ -232,8 +235,11 @@ class ControllerTest extends PHPUnit_Framework_TestCase
      */
     public function postRequestSearchWithEmptyStringReturnEmptyArray()
     {
+        $group = new \Bookmarks\Group();
+        $group->title = 'search engine';
+
         $this->config->expects($this->never())
-            ->method('toArray');
+            ->method('getGroups');
 
         $this->assertEquals(
             json_encode(array()),
@@ -249,10 +255,12 @@ class ControllerTest extends PHPUnit_Framework_TestCase
      */
     public function postRequestShow()
     {
+        $group = new \Bookmarks\Group();
+        $group->title = 'search engine';
+
         $this->config->expects($this->once())
-            ->method('search')
-            ->with($this->equalTo('engine'))
-            ->will($this->returnValue(array('id1', 'id2')));
+            ->method('getGroups')
+            ->will($this->returnValue(array($group)));
 
         $this->view->expects($this->at(0))
             ->method('header')
@@ -265,7 +273,7 @@ class ControllerTest extends PHPUnit_Framework_TestCase
             ->with($this->equalTo('Content-type: application/json'));
 
         $this->assertEquals(
-            json_encode(array('id1', 'id2')),
+            json_encode(array($group->getId())),
             $this->controller->parseRequest('POST', array(
                 'action' => 'show',
                 'search' => 'engine',
