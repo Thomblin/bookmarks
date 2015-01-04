@@ -1,5 +1,5 @@
 .idea/
 cache/
 composer.lock
-config/links.yaml
+config/links.json
 vendor/

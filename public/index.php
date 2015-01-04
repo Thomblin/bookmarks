@@ -9,7 +9,7 @@ use Bookmarks\Controller;
 $env = new \Bookmarks\Environment();
 $env->inject('subdomain', 'dev'); // replace all {subdomain} parts with dev
 
-$storage    = new Storage('../config/links.yaml');
+$storage    = new Storage('../config/links.json');
 $view       = new View();
 $controller = new Controller($storage, $view);
 $controller->injectEnvironment($env);

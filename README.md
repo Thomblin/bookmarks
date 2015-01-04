@@ -5,7 +5,7 @@ You can manage links in groups and specify them by adding certain tags.
 A simple search and suggest form helps you to find a link quickly.
 
 Groups, links and tags can be added easily via the webbrowser. 
-Even though all information is stored in a yaml file which shall help you to deploy and share them with others.
+Even though all information is stored in a json file which shall help you to deploy and share them with others.
 
 # Example
 

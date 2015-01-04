@@ -14,7 +14,7 @@ class ViewTest extends PHPUnit_Framework_TestCase
     public function showAllRendersOverview()
     {
         $storage = new \Bookmarks\Storage(
-            __DIR__ . DIRECTORY_SEPARATOR . 'config' . DIRECTORY_SEPARATOR . 'links.yaml'
+            __DIR__ . DIRECTORY_SEPARATOR . 'config' . DIRECTORY_SEPARATOR . 'links.json'
         );
 
         $view = new \Bookmarks\View();
@@ -141,7 +141,7 @@ class ViewTest extends PHPUnit_Framework_TestCase
     public function showAllReplacesUserVariables()
     {
         $storage = new \Bookmarks\Storage(
-            __DIR__ . DIRECTORY_SEPARATOR . 'config' . DIRECTORY_SEPARATOR . 'links.yaml'
+            __DIR__ . DIRECTORY_SEPARATOR . 'config' . DIRECTORY_SEPARATOR . 'links.json'
         );
 
         $group = new \Bookmarks\Group();

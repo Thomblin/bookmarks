@@ -93,7 +93,7 @@ class StorageTest extends PHPUnit_Framework_TestCase
      */
     private function getFilename()
     {
-        $fileName = __DIR__ . DIRECTORY_SEPARATOR . 'config' . DIRECTORY_SEPARATOR . 'storage.yaml';
+        $fileName = __DIR__ . DIRECTORY_SEPARATOR . 'config' . DIRECTORY_SEPARATOR . 'storage.json';
         return $fileName;
     }
 }
