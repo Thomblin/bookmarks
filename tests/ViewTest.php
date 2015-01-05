@@ -237,4 +237,59 @@ class ViewTest extends PHPUnit_Framework_TestCase
             'html should replace {domain} and contain tag "tag abc"'
         );
     }
+    /**
+     * @test
+     */
+    public function showAllRendersOverviewWithDifferentCacheDir()
+    {
+        $configDir = __DIR__ . DIRECTORY_SEPARATOR . 'config' . DIRECTORY_SEPARATOR;
+        $cacheDir = $configDir . 'cache';
+
+        $this->removeDir($cacheDir);
+
+        $storage = new \Bookmarks\Storage($configDir . 'links.json');
+
+        $view = new \Bookmarks\View($cacheDir);
+        $actual = (string) $view->showAll($storage);
+
+        $this->assertStringContains(
+            '<title>Bookmarks</title>',
+            $actual,
+            'html should contain title'
+        );
+        $this->assertStringContains(
+            '<div class="container">',
+            $actual,
+            'html should contain div container'
+        );
+        $this->assertStringContains(
+            '<legend>my new group</legend>',
+            $actual,
+            'html should contain group'
+        );
+        $this->assertStringContains(
+            'BookmarkController',
+            $actual,
+            'html should contain js BookmarkController'
+        );
+
+        $this->assertTrue(is_dir($cacheDir), "cache dir should have been created");
+        $this->assertNotEmpty(glob($cacheDir . DIRECTORY_SEPARATOR . '*'), "cache dir should contain some files");
+    }
+
+    /**
+     * @param $cacheDir
+     */
+    private function removeDir($cacheDir)
+    {
+        if (is_dir($cacheDir)) {
+            $files = glob($cacheDir . DIRECTORY_SEPARATOR . '*');
+            foreach ($files as $file) {
+                if (is_file($file)) {
+                    unlink($file);
+                }
+            }
+            rmdir($cacheDir);
+        }
+    }
 }

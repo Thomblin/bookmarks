@@ -18,12 +18,55 @@ class View
      */
     private $environment;
 
-    public function __construct()
+    /**
+     * @param string $cacheDir
+     */
+    public function __construct($cacheDir = null)
     {
-        $views = realpath(__DIR__ . '/../../views');
-        $cache = realpath(__DIR__ . '/../../../cache');
+        $this->createBladeInstance($cacheDir);
+        $this->addPublicFileMatcher();
+    }
 
-        $this->blade = new Blade($views, $cache);
+    /**
+     * @param $cacheDir
+     */
+    private function createBladeInstance($cacheDir)
+    {
+        $this->blade = new Blade(
+            realpath(__DIR__ . '/../../views'),
+            $this->getPreparedCacheDir($cacheDir)
+        );
+    }
+
+    /**
+     * @param string $cacheDir
+     */
+    private function getPreparedCacheDir($cacheDir)
+    {
+        if (null === $cacheDir) {
+            $cacheDir = __DIR__ . '/../../../cache';
+        } elseif (!is_dir($cacheDir)) {
+            mkdir($cacheDir, 0777, true);
+        }
+
+        return realpath($cacheDir);
+    }
+
+    /**
+     * add the @publicFile('/file/in/public/folder') syntax to Blade
+     * to allow inline usage of css and js files
+     */
+    private function addPublicFileMatcher()
+    {
+        $this->blade->getCompiler()->extend(function ($view, $compiler) {
+            $pattern = "/(?<!\w)(\s*)@publicFile\('(\s*.*)'\)/";
+
+            return preg_replace(
+                $pattern,
+                '<?php include "' . realpath(__DIR__ . '/../../../public/') . '/$2"; ?>',
+                $view
+            );
+        });
     }
 
     /**
@@ -56,6 +99,18 @@ class View
                 'expanded' => $expanded
             )
         ));
+    }
+
+    /**
+     * @param Environment $env
+     */
+    private function replaceInjectedVars($text)
+    {
+        if ( null !== $this->environment ) {
+            $text = $this->environment->replaceInjectedVars($text);
+        }
+
+        return $text;
     }
 
     /**
@@ -97,17 +152,5 @@ class View
     public function injectEnvironment(Environment $env)
     {
         $this->environment = $env;
-    }
-
-    /**
-     * @param Environment $env
-     */
-    private function replaceInjectedVars($text)
-    {
-        if ( null !== $this->environment ) {
-            $text = $this->environment->replaceInjectedVars($text);
-        }
-
-        return $text;
     }
 } 
