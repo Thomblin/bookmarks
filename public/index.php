@@ -10,7 +10,7 @@ $env = new \Bookmarks\Environment();
 $env->inject('subdomain', 'dev'); // replace all {subdomain} parts with dev
 
 $storage    = new Storage('../config/links.json');
-$view       = new View();
+$view       = new View('../cache');
 $controller = new Controller($storage, $view);
 $controller->injectEnvironment($env);
 
