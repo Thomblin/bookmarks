@@ -7,7 +7,7 @@
 .settings {
     width: 24px;
     height: 24px;
-    background: url("/graphics/menu.png");
+    background: url("?file=graphics/menu.png");
 }
 
 nav ul {

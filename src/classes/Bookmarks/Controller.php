@@ -19,6 +19,10 @@ class Controller
      * @var Search
      */
     private $search;
+    /**
+     * @var string
+     */
+    private $baseDir;
 
     /**
      * @param Storage $storage
@@ -28,6 +32,7 @@ class Controller
     {
         $this->storage = $storage;
         $this->view    = $view;
+        $this->baseDir = realpath(__DIR__ . '/../../..');
     }
 
     /**
@@ -56,11 +61,50 @@ class Controller
     }
 
     /**
+     * @param Environment $env
+     */
+    public function injectEnvironment(Environment $env)
+    {
+        $this->getSearch()->injectEnvironment($env);
+        $this->view->injectEnvironment($env);
+    }
+
+    /**
      * @param array $values
      */
     private function getRequestAction(array $values)
     {
-        return $this->view->showAll($this->storage);
+        if ( isset($values['file']) ) {
+            return $this->getPublicFileContents($values['file']);
+        } else {
+            return $this->view->showAll($this->storage);
+        }
+    }
+
+    /**
+     * @param string $filename
+     *
+     * @return string
+     */
+    private function getPublicFileContents($filename)
+    {
+        $path = realpath($this->getBaseDir() . '/public/' . $filename);
+        if (is_file($path)) {
+
+            if ('graphics' === substr($filename, 0, 8)) {
+                $this->view->header("Content-Type: image/png");
+                $this->view->header("Content-Length: " . filesize($path));
+            }
+
+            return file_get_contents($path);
+        }
+
+        return '';
+    }
+
+    public function getBaseDir()
+    {
+        return $this->baseDir;
     }
 
     /**
@@ -167,14 +211,5 @@ class Controller
         $this->view->header('Content-type: application/json');
 
         return json_encode($ids);
-    }
-
-    /**
-     * @param Environment $env
-     */
-    public function injectEnvironment(Environment $env)
-    {
-        $this->getSearch()->injectEnvironment($env);
-        $this->view->injectEnvironment($env);
     }
 }

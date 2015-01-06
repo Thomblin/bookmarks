@@ -14,4 +14,4 @@ $view       = new View('../cache');
 $controller = new Controller($storage, $view);
 $controller->injectEnvironment($env);
 
-echo $controller->parseRequest($_SERVER['REQUEST_METHOD'], $_POST);
+echo $controller->parseRequest($_SERVER['REQUEST_METHOD'], $_REQUEST);

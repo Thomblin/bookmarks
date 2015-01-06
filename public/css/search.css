@@ -11,7 +11,7 @@
     padding: 6px 15px 6px 30px;
     width: 100%;
     margin: 3px;
-    background: url('/graphics/search.png') no-repeat 8px 6px;
+    background: url('?file=graphics/search.png') no-repeat 8px 6px;
     border-radius: 15px;
     -moz-border-radius: 15px;
     -webkit-border-radius: 15px;

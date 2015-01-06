@@ -5,7 +5,7 @@
             @include('elements.link')
         @endforeach
         <p class="new">
-            <img src="/graphics/plus.png" alt="add link" title="add link" class="add link"/>
+            <img src="?file=graphics/plus.png" alt="add link" title="add link" class="add link"/>
         </p>
     </div>
 </fieldset>

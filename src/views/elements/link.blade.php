@@ -3,5 +3,5 @@
     @foreach($link->tags as $tag)
         <span>{{{$tag}}}</span>
     @endforeach
-    <img src="/graphics/edit.png" alt="add tag" title="add tag" class="edit link"/>
+    <img src="?file=graphics/edit.png" alt="add tag" title="add tag" class="edit link"/>
 </p>

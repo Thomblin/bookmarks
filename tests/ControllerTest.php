@@ -297,4 +297,47 @@ class ControllerTest extends PHPUnit_Framework_TestCase
             ))
         );
     }
+
+    /**
+     * @test
+     */
+    public function getPublicFileContentsReturnsFileIfFilenameIsValid()
+    {
+        $this->assertEquals(
+            file_get_contents(__DIR__ . '/../public/js/main.js'),
+            $this->controller->parseRequest('GET', array('file' => 'js/main.js'))
+        );
+    }
+
+    /**
+     * @test
+     */
+    public function getPublicFileContentsReturnsFileAndPutsHeaderIfFileIsImage()
+    {
+        $this->view->expects($this->at(0))
+            ->method('header')
+            ->with($this->equalTo('Content-Type: image/png'));
+        $this->view->expects($this->at(1))
+            ->method('header')
+            ->with($this->equalTo('Content-Length: 256'));
+
+        $this->assertEquals(
+            file_get_contents(__DIR__ . '/../public/graphics/edit.png'),
+            $this->controller->parseRequest('GET', array('file' => 'graphics/edit.png'))
+        );
+    }
+
+    /**
+     * @test
+     */
+    public function getPublicFileContentsReturnsEmptyStringIfFileIsInvalid()
+    {
+        $this->view->expects($this->never())
+            ->method('header');
+
+        $this->assertEquals(
+            '',
+            $this->controller->parseRequest('GET', array('file' => 'js/i_do_not_exist.js'))
+        );
+    }
 }
