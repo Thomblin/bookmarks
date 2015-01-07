@@ -77,7 +77,7 @@ class Search
      */
     private function isWordPartOfText($search, $text)
     {
-        return false !== strpos($text, " {$search}") || 0 === strpos($text, $search);
+        return false !== stripos($text, " {$search}") || 0 === stripos($text, $search);
     }
 
     /**
