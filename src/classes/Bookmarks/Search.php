@@ -46,8 +46,11 @@ class Search
             }
         }
 
-        $result = array_unique($result);
         sort($result);
+        $result = array_values(array_intersect_key(
+            $result,
+            array_unique(array_map("StrToLower", $result))
+        ));
 
         return $result;
     }
