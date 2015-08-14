@@ -1,4 +1,4 @@
-<p id="{!! $link->getId() !!}" class="bookmark">
+<p id="{{ $link->getId() }}" class="bookmark">
     <a href="{{{$link->url}}}" target=\"_blank\">{{{$link->title}}}</a>
     @foreach($link->tags as $tag)
         <span>{{{$tag}}}</span>
