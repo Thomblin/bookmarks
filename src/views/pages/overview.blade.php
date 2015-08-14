@@ -8,8 +8,8 @@
     </div>
 
     <div id="groups" class="hideCollapsed">
-        {{$groupHtml}}
+        {!! $groupHtml !!}
     </div>
 
-    @include('elements.modals')
+@include('elements.modals')
 @stop

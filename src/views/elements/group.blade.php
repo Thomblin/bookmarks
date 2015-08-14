@@ -1,4 +1,4 @@
-<fieldset id="{{$group->getId()}}" class="bookmarkgroup {{{ isset($expanded) && $expanded ? '' : 'hidden' }}}">
+<fieldset id="{!! $group->getId() !!}" class="bookmarkgroup {{{ isset($expanded) && $expanded ? '' : 'hidden' }}}">
     <legend>{{{$group->title}}}</legend>
     <div class="content">
         @foreach($group->getLinks() as $link)
